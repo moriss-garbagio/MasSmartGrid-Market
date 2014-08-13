@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="GROOVY_SUPPORT"/>
+	<classpathentry kind="con" path="REPAST_SIMPHONY_SUPPORT"/>
+	<classpathentry kind="lib" path="lib/gson-2.2.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/gson-2.2.1-sources.jar"/>
+	<classpathentry kind="lib" path="lib/gson-2.2.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

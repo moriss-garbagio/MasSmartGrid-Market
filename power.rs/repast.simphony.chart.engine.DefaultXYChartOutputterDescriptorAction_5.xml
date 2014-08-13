@@ -1,0 +1,48 @@
+<repast.simphony.chart.engine.DefaultXYChartOutputterDescriptor>
+  <name>Demand</name>
+  <outputterFactory class="repast.simphony.chart.wizard.XYChartMappingsStep$XYFactory"/>
+  <dataSetHandler>
+    <dataSets>
+      <string>Generator</string>
+    </dataSets>
+  </dataSetHandler>
+  <streamHandler>
+    <columns/>
+  </streamHandler>
+  <isBatchAction>false</isBatchAction>
+  <dataSetId class="string">Generator</dataSetId>
+  <showLegend>true</showLegend>
+  <multipleSeries>false</multipleSeries>
+  <xColumnName>Tick</xColumnName>
+  <autoRangeX>true</autoRangeX>
+  <autoRangeY>true</autoRangeY>
+  <visibleXRange>100.0</visibleXRange>
+  <visibleYRange>0.0</visibleYRange>
+  <xMin>0.0</xMin>
+  <xMax>0.0</xMax>
+  <yMin>0.0</yMin>
+  <yMax>0.0</yMax>
+  <precisionValue>3</precisionValue>
+  <maxHistory>500</maxHistory>
+  <seriesType>LINE</seriesType>
+  <series>
+    <repast.simphony.chart.Series>
+      <seriesID>CurrentDemandLabel</seriesID>
+      <valueColumn>CurrentDemand</valueColumn>
+      <hashCode>735913853</hashCode>
+      <proxy>false</proxy>
+    </repast.simphony.chart.Series>
+    <repast.simphony.chart.Series>
+      <seriesID>MeanDeficitLabel</seriesID>
+      <valueColumn>MeanDeficit</valueColumn>
+      <hashCode>794805241</hashCode>
+      <proxy>false</proxy>
+    </repast.simphony.chart.Series>
+    <repast.simphony.chart.Series>
+      <seriesID>DeficitLabel</seriesID>
+      <valueColumn>Deficit</valueColumn>
+      <hashCode>-1490042651</hashCode>
+      <proxy>false</proxy>
+    </repast.simphony.chart.Series>
+  </series>
+</repast.simphony.chart.engine.DefaultXYChartOutputterDescriptor>

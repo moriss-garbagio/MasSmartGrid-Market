@@ -1,0 +1,7 @@
+<context id="Smart Grid"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://repast.org/scenario/context"
+	class="power.SmartGridBuilder">
+	<projection type="network" id="Smart Grid Network"></projection>
+
+</context>

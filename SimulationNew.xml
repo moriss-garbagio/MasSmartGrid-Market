@@ -1,0 +1,249 @@
+<Simulation>
+	<GridModel type="Auctioneer">
+		<StopLock value="1000000"/>
+		<Failure type="Exponential">
+			<Lambda value="0.0002283" />
+		</Failure>
+		<Repair type="Normal">
+			<Mean value="2" />
+			<StandardDeviation value="0.2" />
+		</Repair>
+		<BlackoutRadius type="Uniform">
+			<Min value="1" />
+			<Max value="10" />
+		</BlackoutRadius>
+		<PowerPlant name="g1" learning="StupidLearning">
+			<A value="0" />
+			<B value="0" />
+			<C value="7" />
+			<MinQuantityGenerator>
+				<Mean type="ConstantModel">
+					<Constant value="100" />
+				</Mean>
+			</MinQuantityGenerator>
+			<MaxQuantityGenerator>
+				<Mean type="ConstantModel">
+					<Constant value="500" />
+				</Mean>
+				<StandardDeviation type="Constant">
+					<Constant value="50" />
+				</StandardDeviation>
+				<Adjuster/>
+			</MaxQuantityGenerator>
+			<ScalingFactorSet typeformat="json">[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+			</ScalingFactorSet>
+			<ActionSet typeformat="json">[-0.3,-0.1,0,0.1,0.3]</ActionSet>
+			<MinValue value="1" />
+			<Alpha value=".75" />
+		</PowerPlant>
+		<PowerPlant name="g2" learning="StupidLearning">
+			<A value="0.00194" />
+			<B value="7.85" />
+			<C value="0" />
+			<MinQuantityGenerator>
+				<Mean type="ConstantModel">
+					<Constant value="200" />
+				</Mean>
+			</MinQuantityGenerator>
+			<MaxQuantityGenerator>
+				<Mean type="ConstantModel">
+					<Constant value="500" />
+				</Mean>
+			</MaxQuantityGenerator>
+			<ScalingFactorSet typeformat="json">[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+			</ScalingFactorSet>
+			<ActionSet typeformat="json">[-0.3,-0.1,0,0.1,0.3]</ActionSet>
+			<MinValue value="1" />
+			<Alpha value=".5" />
+		</PowerPlant>
+		<PowerPlant name="g3" learning="StupidLearning">
+			<A value="0.00482" />
+			<B value="8" />
+			<C value="0"></C>
+			<MinQuantityGenerator>
+				<Mean type="ConstantModel">
+					<Constant value="0" />
+				</Mean>
+			</MinQuantityGenerator>
+			<MaxQuantityGenerator>
+				<Mean type="ConstantModel">
+					<Constant value="200" />
+				</Mean>
+			</MaxQuantityGenerator>
+			<ScalingFactorSet typeformat="json">[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+			</ScalingFactorSet>
+			<ActionSet typeformat="json">[0]</ActionSet>
+			<MinValue value="1" />
+			<Alpha value=".9" />
+		</PowerPlant>
+		<Accuracy value="0.1" />
+		<Epsilon value="10" />
+		<Lambda value="10" />
+		<ScaleUpFactor value="1.1" />
+		<ScaleDownFactor value="0.9" />
+		<PriceAdjustment value="0.1" />
+	</GridModel>
+	<AgentGenerator name="Home" population="400">
+		<SuspendableModelGenerator type="StaticRandomModel">
+			<Mean type="ConstantModel" format="json">
+				<Constant value="0.1"></Constant>
+			</Mean>
+		</SuspendableModelGenerator>
+		<LoadModelGenerator name="LoadModel">
+			<Mean type="DataModel" format="json">[0.54, 0.5, 0.47, 0.46, 0.48,
+				0.53, 0.59, 0.62, 0.65, 0.68, 0.72, 0.76, 0.8, 0.84, 0.87, 0.9,
+				0.92, 0.96, 1, 1.02, 0.98, 0.87, 0.73, 0.62]</Mean>
+			<StandardDeviation type="Constant">
+				<Constant value="0.1" />
+			</StandardDeviation>
+			<PredictionError type="Constant">
+				<Constant value="0.15" />
+			</PredictionError>
+			<Adjuster>
+				<Min value="0.5"></Min>
+				<Max value="2"></Max>
+			</Adjuster>
+		</LoadModelGenerator>
+		<GenerationModelGenerator>
+			<Mean type="DataModel" format="json">
+				[1, 1.1, 1.2, 1.2, 1.5, 1.5, 1.5, 1.1, 1, 0.9, 0.9, 0.5, 0.4, 0.3, 0.5,
+				0.3, 0.4, 0.6, 0.8, 0.9, 1, 1.1, 1.2, 1.1]
+  			</Mean>
+			<MeanFactor type="Normal">
+				<Mean value="0.33" />
+				<StandardDeviation value=".1" />
+			</MeanFactor>
+			<CostFactor type="Constant">
+				<Constant value="3.6" />
+			</CostFactor>
+			<Adjuster>
+				<Min value="0"></Min>
+				<Max value="1"></Max>
+			</Adjuster>
+		</GenerationModelGenerator>
+		<StorageGenerator>
+			<Capacity type="Normal">
+				<Mean value="1.25" />
+				<StandardDeviation value="0.3"></StandardDeviation>
+				<Adjuster>
+					<Min value="1" />
+					<Max value="1.75" />
+				</Adjuster>
+			</Capacity>
+			<CostFactor type="Constant">
+				<Constant value=".48" />
+			</CostFactor>
+		</StorageGenerator>
+		<ForesightRandomParameter type="Constant">
+			<Constant value="24" />
+		</ForesightRandomParameter>
+	</AgentGenerator>
+	<AgentGenerator name="Commercial" population="200">
+		<SuspendableModelGenerator type="StaticRandomModel">
+			<Mean type="ConstantModel" format="json">
+				<Constant value="0.1"></Constant>
+			</Mean>
+		</SuspendableModelGenerator>
+		<LoadModelGenerator name="LoadModel">
+			<Mean type="DataModel" format="json">[0.83, 0.81, 0.8, 0.8, 0.8, 0.77,
+				0.8, 0.96, 1.18, 1.36, 1.46, 1.5, 1.51, 1.53, 1.52, 1.46, 1.3, 1.19,
+				1.15, 1.14, 1.05, 0.96, 0.89, 0.86]</Mean>
+			<StandardDeviation type="Constant">
+				<Constant value="0.2" />
+			</StandardDeviation>
+			<PredictionError type="Constant">
+				<Constant value="0.15"></Constant>
+			</PredictionError>
+			<Adjuster>
+				<Min value="0.3"></Min>
+				<Max value="2.5"></Max>
+			</Adjuster>
+		</LoadModelGenerator>
+		<GenerationModelGenerator>
+			<Mean type="DataModel" format="json">[1, 1.1, 1.2, 1.2, 1.5, 1.5, 1.5,
+				1.1, 1, 0.9, 0.9, 0.5, 0.4, 0.3, 0.5, 0.3, 0.4, 0.6, 0.8, 0.9, 1,
+				1.1, 1.2, 1.1]</Mean>
+			<MeanFactor type="Normal">
+				<Mean value="0.66"></Mean>
+				<StandardDeviation value="0.1"></StandardDeviation>
+			</MeanFactor>
+			<CostFactor type="Constant">
+				<Constant value="3.6"></Constant>
+			</CostFactor>
+			<Adjuster>
+				<Min value="0"></Min>
+				<Max value="1.5"></Max>
+			</Adjuster>
+		</GenerationModelGenerator>
+		<StorageGenerator>
+			<Capacity type="Normal">
+				<Mean value="2.5"></Mean>
+				<StandardDeviation value="0.2"></StandardDeviation>
+				<Adjuster>
+					<Min value="2"></Min>
+					<Max value="4"></Max>
+				</Adjuster>
+			</Capacity>
+			<CostFactor type="Constant">
+				<Constant value="0.48"></Constant>
+			</CostFactor>
+		</StorageGenerator>
+		<ForesightRandomParameter type="Constant">
+			<Constant value="24"></Constant>
+		</ForesightRandomParameter>
+	</AgentGenerator>
+	<AgentGenerator name="Industrial" population="20">
+		<SuspendableModelGenerator type="StaticRandomModel">
+			<Mean type="ConstantModel" format="json">
+				<Constant value="0.1"></Constant>
+			</Mean>
+		</SuspendableModelGenerator>
+		<LoadModelGenerator name="LoadModel">
+			<Mean type="DataModel" format="json">[9.99, 9.71, 9.57, 9.68, 10.29,
+				11.63, 13.53, 15.56, 17.3, 18.5, 19.23, 19.54, 19.8, 19.8, 19.41,
+				18.54, 17.25, 16.26, 15.84, 15.39, 14.23, 12.72, 11.38, 10.5]</Mean>
+			<StandardDeviation type="Constant">
+				<Constant value="2" />
+			</StandardDeviation>
+			<PredictionError type="Constant">
+				<Constant value="0.15"></Constant>
+			</PredictionError>
+			<Adjuster>
+				<Min value="7"></Min>
+				<Max value="22"></Max>
+			</Adjuster>
+		</LoadModelGenerator>
+		<GenerationModelGenerator>
+			<Mean type="DataModel" format="json">[1, 1.1, 1.2, 1.2, 1.5, 1.5, 1.5,
+				1.1, 1, 0.9, 0.9, 0.5, 0.4, 0.3, 0.5, 0.3, 0.4, 0.6, 0.8, 0.9, 1,
+				1.1, 1.2, 1.1]</Mean>
+			<MeanFactor type="Normal">
+				<Mean value="6.6"></Mean>
+				<StandardDeviation value="2"></StandardDeviation>
+			</MeanFactor>
+			<CostFactor type="Constant">
+				<Constant value="3.6"></Constant>
+			</CostFactor>
+			<Adjuster>
+				<Min value="0"></Min>
+				<Max value="15"></Max>
+			</Adjuster>
+		</GenerationModelGenerator>
+		<StorageGenerator>
+			<Capacity type="Normal">
+				<Mean value="25"></Mean>
+				<StandardDeviation value="3"></StandardDeviation>
+				<Adjuster>
+					<Min value="20"></Min>
+					<Max value="35"></Max>
+				</Adjuster>
+			</Capacity>
+			<CostFactor type="Constant">
+				<Constant value="0.48"></Constant>
+			</CostFactor>
+		</StorageGenerator>
+		<ForesightRandomParameter type="Constant">
+			<Constant value="24"></Constant>
+		</ForesightRandomParameter>
+	</AgentGenerator>
+</Simulation>
